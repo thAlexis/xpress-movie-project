@@ -19,6 +19,18 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("views", import.meta.dirname + "/templates");
 
+app.get(["/", "/home", "/accueil"], (req, res, next) => {
+  res.render("index");
+});
+
+app.get(["/inscription", "/signup"], (req, res, next) => {
+  res.render("signup");
+});
+
+app.get(["/connexion", "/signin"], (req, res, next) => {
+  res.render("signin");
+});
+
 const PORT = process.env.PORT || 5555;
 
 app.listen(PORT, () =>

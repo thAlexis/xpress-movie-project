@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("../config/dependencies.ejs") %>
+    <title>Inscription</title>
+  </head>
+  <body class="bg-[#EDEDED]">
+    <%- include("components/navbar.ejs") %>
+    <main class="flex justify-center mt-[5rem] mb-[10rem]">
+      <div
+        class="bg-[#1B263B] text-[#F5F5F5] p-[2rem] flex flex-col rounded-[1rem] w-[20%]"
+      >
+        <h1 class="self-center mb-[2rem]">Sign up</h1>
+        <form method="post" class="flex flex-col">
+          <label for="firstname">Prénom</label>
+          <input
+            class="bg-white rounded-[0.2rem] mb-[1rem]"
+            type="text"
+            name="firstname"
+          />
+          <label for="lastname">Nom</label>
+          <input
+            class="bg-white rounded-[0.2rem] mb-[1rem]"
+            type="text"
+            name="lastname"
+          />
+          <label for="mail">Email</label>
+          <input
+            class="bg-white rounded-[0.2rem] mb-[1rem]"
+            type="email"
+            name="mail"
+          />
+          <label for="password">Mot de passe</label>
+          <input
+            class="bg-white rounded-[0.2rem] mb-[1rem]"
+            type="password"
+            name="password"
+          />
+          <button
+            class="bg-[#F5F5F5] text-black w-[min-content] p-[0.5rem] self-center rounded-[0.5rem] cursor-pointer"
+          >
+            S'inscrire
+          </button>
+        </form>
+      </div>
+    </main>
+    <%- include("components/footer.ejs") %>
+  </body>
+</html>
