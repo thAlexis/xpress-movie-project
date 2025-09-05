@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import session from "express-session";
+import userSignIn from "./routes/userSignIn.route.js";
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.use(express.urlencoded());
 
 app.use(express.static("public"));
 
+app.use("/signin", userSignIn);
+
 app.set("view engine", "ejs");
 app.set("views", import.meta.dirname + "/templates");
 
@@ -27,7 +30,7 @@ app.get(["/inscription", "/signup"], (req, res, next) => {
   res.render("signup");
 });
 
-app.get(["/connexion", "/signin"], (req, res, next) => {
+app.get(["/connexion", "/signin", "login"], (req, res, next) => {
   res.render("signin");
 });
 
