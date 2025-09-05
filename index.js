@@ -2,6 +2,8 @@ import express from "express";
 import "dotenv/config";
 import session from "express-session";
 import userSignIn from "./routes/userSignIn.route.js";
+import indexRouter from "./routes/index.route.js";
+import userSignUp from "./routes/userSignUp.route.js";
 
 const app = express();
 
@@ -18,12 +20,18 @@ app.use(express.urlencoded());
 app.use(express.static("public"));
 
 app.use("/signin", userSignIn);
+app.use("/signup", userSignUp);
+app.use("/index", indexRouter);
 
 app.set("view engine", "ejs");
 app.set("views", import.meta.dirname + "/templates");
 
-app.get(["/", "/home", "/accueil"], (req, res, next) => {
-  res.render("index");
+app.get(["/", "/index", "/home", "/accueil"], (req, res, next) => {
+  res.render("index", {
+    lastname: req.session.lastname,
+    firstname: req.session.firstname,
+    role: req.session.role,
+  });
 });
 
 app.get(["/inscription", "/signup"], (req, res, next) => {

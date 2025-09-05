@@ -3,4 +3,6 @@ import UserController from "../controllers/user.controller.js";
 
 const router = express.Router();
 
+router.post("/", UserController.verifyUser);
+
 export default router;

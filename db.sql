@@ -28,3 +28,4 @@ CREATE TABLE user_favorites (
   FOREIGN KEY (id_movie) REFERENCES movies(id)
 );
 
+INSERT INTO users VALUES (null, "Wick", "John", "wick.john@mail.fr", "$2b$10$N5AAxP9m19lF.s4AvbdG1u0SOQPmqN43XRqiz9gx9bvji.ADxkd.." , "admin")

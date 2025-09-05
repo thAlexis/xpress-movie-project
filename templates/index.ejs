@@ -7,6 +7,9 @@
     <title>Page d'accueil</title>
   </head>
   <body>
-    <%- include("components/navbar.ejs") %>
+    <%- include("components/navbar.ejs") %> <% if (typeof firstname !==
+    "undefined" && typeof lastname !== "undefined") { %>
+    <p>Bonjour <%= firstname %> <%= lastname %></p>
+    <% } %>
   </body>
 </html>
