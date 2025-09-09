@@ -4,6 +4,8 @@ import session from "express-session";
 import userSignIn from "./routes/userSignIn.route.js";
 import indexRouter from "./routes/index.route.js";
 import userSignUp from "./routes/userSignUp.route.js";
+import isAuth from "./controllers/isAuth.controller.js";
+import movieManageRouter from "./routes/movieManage.route.js";
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.use(express.static("public"));
 app.use("/signin", userSignIn);
 app.use("/signup", userSignUp);
 app.use("/index", indexRouter);
+app.use("/moviemanage", movieManageRouter);
 
 app.set("view engine", "ejs");
 app.set("views", import.meta.dirname + "/templates");
@@ -40,6 +43,14 @@ app.get(["/inscription", "/signup"], (req, res, next) => {
 
 app.get(["/connexion", "/signin", "login"], (req, res, next) => {
   res.render("signin");
+});
+
+app.get("/moviemanage", isAuth.isAdmin, (req, res, next) => {
+  res.render("movieManage", {
+    lastname: req.session.lastname,
+    firstname: req.session.firstname,
+    role: req.session.role,
+  });
 });
 
 const PORT = process.env.PORT || 5555;

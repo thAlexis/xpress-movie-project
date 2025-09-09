@@ -8,8 +8,11 @@
   </head>
   <body>
     <%- include("components/navbar.ejs") %> <% if (typeof firstname !==
-    "undefined" && typeof lastname !== "undefined") { %>
+    "undefined" || typeof lastname !== "undefined" || typeof role !==
+    "undefined") { %>
     <p>Bonjour <%= firstname %> <%= lastname %></p>
+    <% } else { %>
+    <p>Vous n'êtes pas connecté</p>
     <% } %>
   </body>
 </html>
