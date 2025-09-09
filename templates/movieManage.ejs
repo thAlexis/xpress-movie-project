@@ -50,6 +50,9 @@
             Ajouter
           </button>
         </form>
+        <% if (typeof movie !== "undefined") { %>
+        <p>Le film <%= movie.title %> a été correctement ajouté</p>
+        <% } %>
       </div>
       <div></div>
     </div>

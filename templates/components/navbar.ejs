@@ -7,11 +7,20 @@
   </div>
   <div>
     <ul class="flex gap-[1rem] text-[#F5F5F5]">
+      <li class="mr-[1rem]">
+        Bonjour administrateur <%= firstname %> <%= lastname %>,
+      </li>
       <li><a class="cursor-pointer" href="/home">Accueil</a></li>
       <li>
         <a class="cursor-pointer" href="/moviemanage">Gérer les films</a>
       </li>
-      <li><a class="cursor-pointer" href="/index/logout">Se déconnecter</a></li>
+      <li>
+        <a
+          class="cursor-pointer bg-[#A51F26] hover:bg-[#A00000] p-[0.8rem] rounded-[0.5rem]"
+          href="/index/logout"
+          >Se déconnecter</a
+        >
+      </li>
     </ul>
   </div>
 </nav>
@@ -24,6 +33,7 @@
   </div>
   <div>
     <ul class="flex gap-[1rem] text-[#F5F5F5]">
+      <li>Bonjour <%= firstname %> <%= lastname %></li>
       <li><a class="cursor-pointer">Accueil</a></li>
       <li><a class="cursor-pointer" href="">Mes favoris</a></li>
       <li><a href="">Mon compte</a></li>

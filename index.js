@@ -6,6 +6,7 @@ import indexRouter from "./routes/index.route.js";
 import userSignUp from "./routes/userSignUp.route.js";
 import isAuth from "./controllers/isAuth.controller.js";
 import movieManageRouter from "./routes/movieManage.route.js";
+import moviePageRouter from "./routes/moviePage.route.js";
 
 const app = express();
 
@@ -23,19 +24,12 @@ app.use(express.static("public"));
 
 app.use("/signin", userSignIn);
 app.use("/signup", userSignUp);
-app.use("/index", indexRouter);
+app.use(["/", "/index", "/home", "/accueil"], indexRouter);
 app.use("/moviemanage", movieManageRouter);
+app.use("/moviePage", moviePageRouter);
 
 app.set("view engine", "ejs");
 app.set("views", import.meta.dirname + "/templates");
-
-app.get(["/", "/index", "/home", "/accueil"], (req, res, next) => {
-  res.render("index", {
-    lastname: req.session.lastname,
-    firstname: req.session.firstname,
-    role: req.session.role,
-  });
-});
 
 app.get(["/inscription", "/signup"], (req, res, next) => {
   res.render("signup");

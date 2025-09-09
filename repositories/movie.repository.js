@@ -2,8 +2,24 @@ import connection from "../config/db.js";
 
 async function findMovieByID(id) {
   const SELECT = "SELECT * FROM movies WHERE id = ?";
-  const result = await connection.query(SELECT, id);
-  return result[0][0];
+  try {
+    const result = await connection.query(SELECT, id);
+    return result[0][0];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+async function selectLastFiveMovies() {
+  const SELECT = "SELECT * FROM movies ORDER BY release_date DESC LIMIT 5";
+  try {
+    const result = await connection.query(SELECT);
+    return result[0];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 }
 
 async function addNewMovie(movie) {
@@ -24,4 +40,4 @@ async function addNewMovie(movie) {
   }
 }
 
-export default { addNewMovie, findMovieByID };
+export default { addNewMovie, findMovieByID, selectLastFiveMovies };

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("../config/dependencies.ejs") %>
+    <title>Fiche film</title>
+  </head>
+  <body class="bg-[#F5F5F5]">
+    <%- include("components/navbar.ejs") %>
+    <div class="flex flex-col items-center mt-[1rem]">
+      <h1 class="text-[3rem] font-bold"><%= movie.title %></h1>
+      <div class="flex mt-[2rem] gap-[5rem] w-[80%] justify-center">
+        <div>
+          <img class="h-[35rem]" src="../img/<%= movie.image %>.jpg" />
+        </div>
+        <div class="w-[50%] mt-[1rem]">
+          <h2 class="text-[1.5rem] font-bold">Résumé</h2>
+          <p class="mt-[0.4rem]"><%= movie.summary %></p>
+          <h2 class="text-[1.5rem] font-bold mt-[1rem]">Date de sortie</h2>
+          <p class="mt-[0.4rem]">
+            <%= new Date(movie.release_date).toLocaleDateString('fr-FR') %>
+          </p>
+          <h2 class="text-[1.5rem] font-bold mt-[1rem]">Genre</h2>
+          <p class="mt-[0.4rem]"><%= movie.genre %></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
