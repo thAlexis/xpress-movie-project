@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("../config/dependencies.ejs") %>
+    <title>Mon compte</title>
+  </head>
+  <body>
+    <%- include("components/navbar.ejs") %>
+    <div class="flex justify-center">
+      <div class="flex flex-col items-center mt-[2rem] bg-[#1B263B] text-white w-[min-content] p-[2rem] rounded-[1rem]">
+        <h2 class="text-[2rem] mb-[2rem]">Mon compte</h2>
+        <form class="flex flex-col" action="?_method=PATCH" method="post">
+          <label class="mb-[0.5rem]" for=lastname">Nom</label>
+          <input class="bg-white mb-[1rem] text-black rounded-[0.5rem] p-[0.2rem]" type="text" name="lastname" value="<%= lastname %>" />
+          <label class="mt-[1rem] mb-[0.5rem]" for="firstname">Prénom</label>
+          <input class="bg-white mb-[1rem] text-black rounded-[0.5rem] p-[0.2rem]" type="text" name="firstname" value="<%= firstname %>" />
+          <button class=" mt-[1rem] bg-white text-black cursor-pointer w-[min-content] p-[1rem] rounded-[0.5rem] self-center">Modifier</button>
+        </form>
+        <form class="mt-[1rem]" action="?_method=DELETE" method="post">
+          <button class="bg-red-700 hover:bg-red-900 cursor-pointer w-[min-content] p-[1rem] rounded-[0.5rem] self-center">Supprimer</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

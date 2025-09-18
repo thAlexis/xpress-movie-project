@@ -23,6 +23,29 @@
           </p>
           <h2 class="text-[1.5rem] font-bold mt-[1rem]">Genre</h2>
           <p class="mt-[0.4rem]"><%= movie.genre %></p>
+          <% if (typeof role !== "undefined" && role == "user") { %>
+          <div class="flex gap-[2rem]">
+            <% if (!movieFavs.includes(movie.id.toString())) { %>
+            <form method="post">
+              <button
+                class="bg-[#1B263B] block hover:bg-[#1A299F] text-white p-[1rem] mt-[2rem] rounded-[0.4rem] cursor-pointer w-[max-content]"
+              >
+                Ajouter à mes favoris
+              </button>
+            </form>
+            <% } else { %>
+
+            <form action="<%= movie.id %>?_method=DELETE" method="post">
+              <button
+                class="bg-red-900 block hover:bg-red-700 text-white p-[1rem] mt-[2rem] rounded-[0.4rem] cursor-pointer w-[max-content]"
+              >
+                Supprimer de mes favoris
+              </button>
+            </form>
+            <% } %>
+          </div>
+
+          <% } %>
         </div>
       </div>
     </div>

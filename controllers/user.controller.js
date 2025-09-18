@@ -1,5 +1,6 @@
 import connection from "../config/db.js";
 import userRepository from "../repositories/user.repository.js";
+import userFavoritesRepository from "../repositories/userFavorites.repository.js";
 import passwordCrypt from "../config/bcrypt.js";
 
 async function verifyUser(req, res, next) {
@@ -16,6 +17,14 @@ async function verifyUser(req, res, next) {
     req.session.firstname = user.firstname;
     req.session.lastname = user.lastname;
     req.session.role = user.role;
+    req.session.movieFavs = [];
+    const alreadyFavs = await userFavoritesRepository.selectAllFav(user.id);
+    console.log(alreadyFavs);
+    for (const fav of alreadyFavs) {
+      console.log(fav.id_movie);
+      req.session.movieFavs.push(fav.id_movie.toString());
+    }
+    console.log(req.session.movieFavs);
     console.log(req.session);
     return res.redirect("home");
   }
@@ -40,4 +49,39 @@ function disconnectUser(req, res, next) {
   }
 }
 
-export default { verifyUser, disconnectUser, registerUser };
+async function deleteUser(req, res, next) {
+  const userId = req.session.userId;
+  const result = await userRepository.deleteUserById(userId);
+  console.log(result);
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Erreur");
+    }
+    return res.redirect("/home");
+  });
+}
+
+async function modifyNames(req, res, next) {
+  const userId = req.session.userId;
+  const newLastname = req.body.lastname;
+  const newFirstname = req.body.firstname;
+  const result = await userRepository.modifyUser(
+    userId,
+    newLastname,
+    newFirstname
+  );
+  if (result.affectedRows == 1) {
+    req.session.lastname = newLastname;
+    req.session.firstname = newFirstname;
+    return res.redirect("/account");
+  }
+  return res.status(500).send("erreur dans la modification");
+}
+
+export default {
+  verifyUser,
+  disconnectUser,
+  registerUser,
+  deleteUser,
+  modifyNames,
+};

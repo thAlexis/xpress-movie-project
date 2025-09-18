@@ -32,4 +32,31 @@ async function addNewUser(newUser) {
   }
 }
 
-export default { findByMail, addNewUser };
+async function deleteUserById(userId) {
+  const DELETE = "DELETE FROM users WHERE id = ?";
+  try {
+    const result = await connection.query(DELETE, userId);
+    return result;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+async function modifyUser(userId, newLastname, newFirstname) {
+  const UPDATE = "UPDATE users SET lastname = ?, firstname = ? WHERE id = ?";
+  try {
+    const result = await connection.query(UPDATE, [
+      newLastname,
+      newFirstname,
+      userId,
+    ]);
+    console.log(result);
+    return result[0];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export default { findByMail, addNewUser, deleteUserById, modifyUser };

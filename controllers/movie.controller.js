@@ -16,6 +16,7 @@ async function findLastfive(req, res, next) {
   console.log(lastFive);
   res.render("index", {
     lastFive,
+    userId: req.session.id,
     lastname: req.session.lastname,
     firstname: req.session.firstname,
     role: req.session.role,
@@ -28,7 +29,26 @@ async function findById(req, res, next) {
   if (typeof movie == "undefined" || typeof movie == "null") {
     return res.status(404).send("not found");
   }
-  return res.render("moviePage", { movie });
+  return res.render("moviePage", {
+    movie,
+    userId: req.session.id,
+    lastname: req.session.lastname,
+    firstname: req.session.firstname,
+    role: req.session.role,
+    movieFavs: req.session.movieFavs,
+  });
 }
 
-export default { addMovie, findLastfive, findById };
+async function selectAll(req, res, next) {
+  const allMovies = await movieRepository.selectAllMovies();
+  console.log("//////////////////////", allMovies);
+  res.render("allMovies", {
+    allMovies,
+    userId: req.session.id,
+    lastname: req.session.lastname,
+    firstname: req.session.firstname,
+    role: req.session.role,
+  });
+}
+
+export default { addMovie, findLastfive, findById, selectAll };

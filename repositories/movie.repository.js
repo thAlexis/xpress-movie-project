@@ -40,4 +40,20 @@ async function addNewMovie(movie) {
   }
 }
 
-export default { addNewMovie, findMovieByID, selectLastFiveMovies };
+async function selectAllMovies() {
+  const SELECT = "SELECT * FROM movies";
+  try {
+    const result = await connection.query(SELECT);
+    return result[0];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export default {
+  addNewMovie,
+  findMovieByID,
+  selectLastFiveMovies,
+  selectAllMovies,
+};
